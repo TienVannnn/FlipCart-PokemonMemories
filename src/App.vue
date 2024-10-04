@@ -1,26 +1,16 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div>
+    <main-screen v-if="statusMatch === 'default'" />
+    <InteractScreen v-if="statusMatch == 'match'" />
+  </div>
 </template>
 
-<script>
-import HelloWorld from "./components/HelloWorld.vue";
+<script setup>
+import { ref } from "vue";
+import InteractScreen from "./components/InteractScreen.vue";
+import MainScreen from "./components/MainScreen.vue";
 
-export default {
-  name: "App",
-  components: {
-    HelloWorld,
-  },
-};
+const statusMatch = ref("default");
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style></style>
