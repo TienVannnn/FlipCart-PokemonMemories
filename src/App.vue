@@ -7,6 +7,12 @@
     <InteractScreen
       v-if="statusMatch == 'match'"
       :cardContext="settings.cardContext"
+      @onFinish="onGetResult"
+    />
+    <ResultScreen
+      :timer="timer"
+      v-if="statusMatch == 'result'"
+      @startAgain="startAgain"
     />
   </div>
 </template>
@@ -16,13 +22,16 @@ import { reactive, ref } from "vue";
 import InteractScreen from "./components/InteractScreen.vue";
 import MainScreen from "./components/MainScreen.vue";
 import { shuffled } from "./utils/array";
+import ResultScreen from "./components/ResultScreen.vue";
 
 const statusMatch = ref("default");
+const timer = ref(0);
 const settings = reactive({
   totalOfBlocks: 0,
   cardContext: [],
   startedAt: null,
 });
+
 const onHandleBeforeStart = (config) => {
   settings.totalOfBlocks = config.totalOfBlocks;
   console.log("total of block: ", settings.totalOfBlocks);
@@ -36,6 +45,15 @@ const onHandleBeforeStart = (config) => {
   console.log(settings.cardContext);
   settings.startedAt = new Date().getTime();
   statusMatch.value = "match";
+};
+
+const onGetResult = () => {
+  timer.value = new Date().getTime() - settings.startedAt;
+  statusMatch.value = "result";
+};
+
+const startAgain = () => {
+  statusMatch.value = "default";
 };
 </script>
 

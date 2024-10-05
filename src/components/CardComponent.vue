@@ -2,6 +2,7 @@
 import { ref } from "vue";
 
 const isFlipped = ref(false);
+const isDisabled = ref(false);
 const emit = defineEmits(["onFlip"]);
 
 const props = defineProps({
@@ -15,12 +16,24 @@ const props = defineProps({
 });
 
 const onToggeFlipCart = () => {
+  if (isDisabled.value) return false;
   isFlipped.value = !isFlipped.value;
   if (isFlipped.value) emit("onFlip", props.card);
 };
+
+const onFlipBackCard = () => {
+  isFlipped.value = false;
+};
+const isCorrect = () => {
+  isDisabled.value = true;
+};
+defineExpose({
+  onFlipBackCard,
+  isCorrect,
+});
 </script>
 <template>
-  <div class="card">
+  <div class="card" :class="isDisabled ? 'disabled' : ''">
     <div
       class="card_inner"
       :class="{ isFlipped: isFlipped }"
@@ -60,6 +73,9 @@ const onToggeFlipCart = () => {
 }
 .card_inner.isFlipped {
   transform: rotateY(-180deg);
+}
+.card.disabled .card_inner {
+  cursor: default;
 }
 .card_face {
   position: absolute;
