@@ -1,14 +1,25 @@
 <template>
   <div class="screen">
-    <h1>Interact Component here</h1>
-    <card-component
-      v-for="(card, index) in cardContext"
-      :key="index"
-      :imgBackFace="`images/${card}.png`"
-      :card="{ index, valueCard: card }"
-      ref="cards"
-      @onFlip="checkRule"
-    />
+    <div
+      class="screen_inner"
+      :style="{
+        width: `${
+          ((((920 - 16 * 4) / Math.sqrt(cardContext.length) - 16) * 3) / 4 +
+            16) *
+          Math.sqrt(cardContext.length)
+        }px`,
+      }"
+    >
+      <card-component
+        v-for="(card, index) in cardContext"
+        :key="index"
+        :imgBackFace="`images/${card}.png`"
+        :card="{ index, valueCard: card }"
+        ref="cards"
+        :cardContext="cardContext"
+        @onFlip="checkRule"
+      />
+    </div>
   </div>
 </template>
 
@@ -63,3 +74,23 @@ const checkRule = async (card) => {
   }
 };
 </script>
+
+<style scoped>
+.screen {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background-color: var(--dark);
+  color: var(--light);
+}
+
+.screen_inner {
+  width: calc(424px);
+  display: flex;
+  flex-wrap: wrap;
+  margin: 2rem auto;
+}
+</style>
