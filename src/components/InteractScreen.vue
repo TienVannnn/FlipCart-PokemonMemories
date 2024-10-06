@@ -49,13 +49,11 @@ const checkRule = async (card) => {
     rules.value.length === 2 &&
     rules.value[0].valueCard === rules.value[1].valueCard
   ) {
-    console.log("Correct match");
     cards.value[rules.value[0].index].isCorrect();
     cards.value[rules.value[1].index].isCorrect();
     rules.value = [];
     countCorrect.value++;
     if (countCorrect.value == props.cardContext.length / 2) {
-      console.log("done");
       setTimeout(() => {
         emit("onFinish");
       }, 900);
@@ -64,7 +62,6 @@ const checkRule = async (card) => {
     rules.value.length === 2 &&
     rules.value[0].valueCard !== rules.value[1].valueCard
   ) {
-    console.log("Wrong match");
     await nextTick();
     setTimeout(() => {
       cards.value[rules.value[0].index].onFlipBackCard();

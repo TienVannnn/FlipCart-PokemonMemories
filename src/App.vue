@@ -38,7 +38,6 @@ const settings = reactive({
 
 const onHandleBeforeStart = (config) => {
   settings.totalOfBlocks = config.totalOfBlocks;
-  console.log("total of block: ", settings.totalOfBlocks);
   const firstCard = Array.from(
     { length: settings.totalOfBlocks / 2 },
     (_, i) => i + 1
@@ -46,7 +45,6 @@ const onHandleBeforeStart = (config) => {
   const secondCard = [...firstCard];
   const cards = [...firstCard, ...secondCard];
   settings.cardContext = shuffled(shuffled(shuffled(shuffled(cards))));
-  console.log(settings.cardContext);
   settings.startedAt = new Date().getTime();
   statusMatch.value = "match";
 };

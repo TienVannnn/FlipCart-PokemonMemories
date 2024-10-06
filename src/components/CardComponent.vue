@@ -3,6 +3,7 @@ import { ref } from "vue";
 
 const isFlipped = ref(false);
 const isDisabled = ref(false);
+const isChecking = ref(false);
 const emit = defineEmits(["onFlip"]);
 
 const props = defineProps({
@@ -20,16 +21,21 @@ const props = defineProps({
 });
 
 const onToggeFlipCart = () => {
-  if (isDisabled.value) return false;
+  if (isDisabled.value || isChecking.value) return false;
   isFlipped.value = !isFlipped.value;
-  if (isFlipped.value) emit("onFlip", props.card);
+  if (isFlipped.value) {
+    isChecking.value = true;
+    emit("onFlip", props.card);
+  }
 };
 
 const onFlipBackCard = () => {
   isFlipped.value = false;
+  isChecking.value = false;
 };
 const isCorrect = () => {
   isDisabled.value = true;
+  isChecking.value = false;
 };
 defineExpose({
   onFlipBackCard,

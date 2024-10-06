@@ -14,7 +14,7 @@ const startAgain = () => {
 <template>
   <div class="screen">
     <h1>🎉 Congratulations 🎉</h1>
-    <p>{{ Math.round(timer / 1000) }} seconds</p>
+    <h3>{{ Math.round(timer / 1000) }} seconds</h3>
     <button @click="startAgain">Start again</button>
   </div>
 </template>
