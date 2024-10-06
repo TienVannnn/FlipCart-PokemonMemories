@@ -78,7 +78,7 @@ const checkRule = async (card) => {
 <style scoped>
 .screen {
   width: 100%;
-  height: 100vh;
+  height: auto;
   position: absolute;
   top: 0;
   left: 0;

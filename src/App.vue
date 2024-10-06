@@ -14,6 +14,10 @@
       v-if="statusMatch == 'result'"
       @startAgain="startAgain"
     />
+    <p class="copyright">
+      This game owned by LVT -
+      <a href="mailto:tienlevan78py@gmail.com">view here</a>
+    </p>
   </div>
 </template>
 
@@ -57,4 +61,18 @@ const startAgain = () => {
 };
 </script>
 
-<style></style>
+<style>
+.copyright {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 1.5rem;
+  color: var(--light);
+  z-index: 3;
+  font-size: 1.5rem;
+}
+
+.copyright a {
+  color: #f4dc26;
+}
+</style>
